@@ -1,17 +1,27 @@
-// Starter examples (function output expectations are provided in README)
+// Starter examples
 
 const makeMultiplier = (factor) => (num) => num * factor;
 
 const double = makeMultiplier(2);
-console.log(double(5)); 
 const triple = makeMultiplier(3);
-console.log(triple(4)); 
-
-console.log(" ");
 
 const makeGreeter = (greeting) => (name) => `${greeting}, ${name}!`;
 
 const sayHi = makeGreeter("Hi");
-console.log(sayHi("Shamae"));   
 const sayHello = makeGreeter("Hello");
-console.log(sayHello("Trisha")); 
+
+const multiplierOutput = document.createElement("pre");
+multiplierOutput.textContent =
+  "Multiplier Outputs:\n" +
+  `double(5) = ${double(5)}\n` +
+  `triple(4) = ${triple(4)}\n`;
+multiplierOutput.style.color = "blue";
+document.body.appendChild(multiplierOutput);
+
+const greeterOutput = document.createElement("pre");
+greeterOutput.textContent =
+  "Greeter Outputs:\n" +
+  `sayHi("Shamae") = ${sayHi("Shamae")}\n` +
+  `sayHello("Trisha") = ${sayHello("Trisha")}\n`;
+greeterOutput.style.color = "green";
+document.body.appendChild(greeterOutput);

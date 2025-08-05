@@ -7,29 +7,32 @@ const settings = {
   grammarCheck: true
 };
 
-console.log("All settings:");
+let output = "";
+
+output += "All Settings:\n";
 Object.entries(settings).forEach(([key, value]) => {
-  console.log(`${key}: ${value}`);
+  output += `${key}: ${value}\n`;
 });
 
-console.log(" ");
+output += "\n";
 
 const trueCount = Object.values(settings).filter(v => v === true).length;
-console.log(`Number of enabled settings: ${trueCount}`);
+output += `Number of enabled settings: ${trueCount}\n\n`;
 
-console.log(" ");
-
-const entries = Object.entries(settings);
-const enabledEntries = entries.filter(([key, value]) => value === true);
-console.log("Enabled settings array:");
+output += "Enabled Settings Array:\n";
+const enabledEntries = Object.entries(settings).filter(([_, value]) => value === true);
 enabledEntries.forEach(([key, value]) => {
-  console.log(`${key}: ${value}`);
+  output += `${key}: ${value}\n`;
 });
 
-console.log(" ");
+output += "\n";
 
+output += "Rebuilt Enabled Settings Object:\n";
 const enabledSettings = Object.fromEntries(enabledEntries);
-console.log("Rebuilt enabled settings object:");
 Object.entries(enabledSettings).forEach(([key, value]) => {
-  console.log(`${key}: ${value}`);
+  output += `${key}: ${value}\n`;
 });
+
+const pre = document.createElement("pre");
+pre.textContent = output;
+document.body.appendChild(pre);

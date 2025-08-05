@@ -4,43 +4,37 @@ const students = [
   { name: "Ben", grade: 78 },
   { name: "Clara", grade: 88 },
   { name: "David", grade: 84 },
-  { name: "Ella" } // no grade, should use default
+  { name: "Ella" } // no grade
 ];
 
-const origNames = students.map(student => student.name);
-const upperCased = students.map(student => student.name.toUpperCase());
+let output = "";
 
-console.log(`Original Names: ${origNames.join(", ")}`);
-console.log(`Updated Names: ${upperCased.join(", ")}`);
+const origNames = students.map(student => student.name).join(", ");
+const upperNames = students.map(student => student.name.toUpperCase()).join(", ");
+output += "Original Names: " + origNames + "\n";
+output += "UPPERCASE NAMES: " + upperNames + "\n\n";
 
-console.log(" ");
-
-const grades = students.filter(student => (student.grade ?? 0) >= 85);
-console.log("The students that have grades greater than or equal to 85 are:");
-grades.forEach(student => {
-  console.log(`${student.name} - ${student.grade}`);
-});
-
-console.log(" ");
-
-const totalGrades = students.reduce((sum, student) => sum + (student.grade ?? 0), 0);
-const avg = totalGrades / students.length;
-console.log(`The average is: ${avg}`);
-
-console.log(" ");
-
-const displayStudent = ({ name, grade }) => 
-  `Student: ${name} - Grade: ${grade ?? "No Grade"}`;
-
+output += "Students with grades ≥ 85:\n";
 students.forEach(student => {
-  console.log(displayStudent(student));
+  if ((student.grade ?? 0) >= 85) {
+    output += "> " + student.name + " - " + student.grade + "\n";
+  }
 });
+output += "\n";
 
-console.log(" ");
+const total = students.reduce((sum, student) => sum + (student.grade ?? 0), 0);
+const average = total / students.length;
+output += "Average Grade: " + average + "\n\n";
 
-const displayStudents = ({ name, grade }) => 
-  `Student: ${name} - Grade: ${grade ?? 0}`;
+const displayStudent = ({ name, grade }) =>
+  `> ${name} - Grade: ${grade ?? "No Grade"}`;
 
+output += "All Students:\n";
 students.forEach(student => {
-  console.log(displayStudents(student));
+  output += displayStudent(student) + "\n";
 });
+
+const pre = document.createElement("pre");
+pre.textContent = output;
+pre.style.color = "blue";
+document.body.appendChild(pre);

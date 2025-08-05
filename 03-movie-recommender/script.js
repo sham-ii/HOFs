@@ -6,22 +6,28 @@ const movies = [
   { title: "Interstellar", genre: "Sci-Fi", rating: 8.6 }
 ];
 
+let output = "";
+
+output += "The movies that have ratings >= to 8 are:<br>";
 const ratings = movies.filter(movie => movie.rating >= 8);
-console.log("The movies that have ratings >= to 8 are:");
-ratings.forEach(movie=> {
-  console.log(`TITLE : ${movie.title} - GENRE : ${movie.genre} - RATINGS : ${movie.rating}`);
+ratings.forEach(movie => {
+  output += `TITLE : ${movie.title} - GENRE : ${movie.genre} - RATINGS : ${movie.rating}<br>`;
 });
 
-console.log(" ");
+output += "<br>";
 
-const movieList = movies.map(movie => 
-  `${movie.title} (${movie.genre}) - ${movie.rating} ⭐`
-);
-movieList.forEach(movie => console.log(movie));
+movies.forEach(movie => {
+  output += `${movie.title} (${movie.genre}) - ${movie.rating} ⭐<br>`;
+});
 
-console.log(" ");
+output += "<br>";
 
 const recommend = (movie, minRating = 8) => movie.rating >= minRating;
 movies.forEach(movie => {
-  console.log(`${movie.title}, recommended? : ${recommend(movie)}`);
+  const isRecommended = recommend(movie);
+  output += `<span style="color:green;">${movie.title}, recommended?</span> : <span style="color:blue;">${isRecommended}</span><br>`;
 });
+
+const container = document.createElement("div");
+container.innerHTML = `<pre>${output}</pre>`;
+document.body.appendChild(container);
